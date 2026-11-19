@@ -1,0 +1,15 @@
+{
+  "name": "cato-motion-studio",
+  "private": true,
+  "type": "module",
+  "devDependencies": {
+    "hyperframes": "0.9.70",
+    "playwright": "1.65.1"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "test": "node render.mjs tests/quadrato/index.html tests/output/test.mp4"
+  }
+}

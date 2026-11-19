@@ -1,0 +1,30 @@
+# Dipendenze e file generati
+node_modules/
+dist/
+.DS_Store
+
+# I film restano sul Mac di chi li fa: lo studio è pubblico e contiene solo quello che serve per partire
+films/
+# Screenshot con documenti veri di clienti: restano sul Mac
+assets/screenshots/relazione-tecnica/
+
+# Video finiti e materiale pesante: restano sul Mac (archivio comune su Drive), non su GitHub
+films/*/video/
+films/*/claude-design/
+**/renders/
+**/snapshots/
+*.mp4
+*.mov
+*.webm
+*.zip
+
+# Prove del setup: si rigenerano ogni volta
+tests/output/
+tests/hyperframes-prova/assets/
+tests/hyperframes-init/
+tests/wrapper-strada-a-in-hyperframes/
+
+# Cache dello Studio HyperFrames
+.hyperframes/
+.thumbnails/
+.waveform-cache/

@@ -1,0 +1,21 @@
+{
+  "extraKnownMarketplaces": {
+    "hyperframes": {
+      "source": { "source": "github", "repo": "heygen-com/hyperframes" }
+    }
+  },
+  "enabledPlugins": {
+    "hyperframes@hyperframes": true
+  },
+  "enableAllProjectMcpServers": true,
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup",
+        "hooks": [
+          { "type": "command", "command": "bash \"$CLAUDE_PROJECT_DIR/tools/avvio.sh\"", "timeout": 600 }
+        ]
+      }
+    ]
+  }
+}
