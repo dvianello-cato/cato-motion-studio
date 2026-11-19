@@ -54,7 +54,7 @@ Riscrivi il prompt nello scheletro del director's brief (dalla guida "Motion gra
 | 3 | **Reference** | video, immagini o link di riferimento: cosa prenderne (la grammatica) e cosa no (contenuti, loghi altrui). Nessuno → "nessuna, stile da brand.md" |
 | 4 | **Strumenti** | HyperFrames (formato modificabile nello Studio), Fish Audio se c'è voce, gli asset disponibili in `assets/` |
 | 5 | **Brand** | palette, font, logo e screenshot da usare (da `brand.md`), e gli stati di ogni elemento UI che si anima |
-| 6 | **Direzione** | lo stile di movimento in una frase (es. "un solo contenitore che non taglia mai e si trasforma"), le molle di casa, le transizioni |
+| 6 | **Direzione** | lo stile di movimento in una frase. Il predefinito è lo stile **calmo** di `brand.md` ("Movimento"): scrivi come lo applichi qui, e scrivi solo se la persona chiede di più (o di meno) |
 | 7 | **Beat sheet** | tabella: battito, secondi, cosa succede, suono. 120 BPM, eventi forti sul primo battito della battuta |
 | 8 | **Testo a schermo** | le frasi esatte, la gerarchia, quanto restano a schermo per essere lette (almeno 1,5 s), dimensioni minime |
 | 9 | **Cose da evitare** | i divieti di `CLAUDE.md` più quelli specifici di questo video |
@@ -83,6 +83,8 @@ Progetto in `films/<nome-video>/progetto/`, con `hyperframes.json`, una copia di
 
 Prima di scrivere composizioni leggi la skill `/hyperframes` del plugin e i suoi riferimenti che servono: `references/format.md` (struttura, attributi), `references/motion.md` (movimento), `references/sound.md` (suono), più il file del tipo di video in `references/types/` (per uno spot: `launch.md`). Se non sono caricate, le trovi in `~/.claude/plugins/cache/hyperframes/hyperframes/<versione>/skills/hyperframes/`.
 
+**Stile di movimento: calmo, sempre.** Segui la sezione "Movimento" di `brand.md`: camera quasi ferma (al massimo una spinta lenta per scena), testo parola per parola senza rimbalzi, entrate che salgono di poco e si posano, uscite morbide. L'interesse viene dai dettagli a tempo con la musica (linee che si disegnano, spunte, pannello navy, luce sul logo), non dal muovere tutto. Whip pan, scie, zoom ripetuti, 3D di taglio e lettere che rimbalzano solo se la persona li chiede. Nel ciclo di critica, "qualità del movimento" vuol dire anche questo: se un fotogramma per battito mostra la camera in un posto diverso quasi ogni volta, è troppo.
+
 **Prima di disegnare a mano un effetto, cercalo nel catalogo** con `/hyperframes-registry` (`npx hyperframes catalog --json`): ci sono già scie di movimento (`echo-smear`), cursori grandi per i tutorial, una schermata "ripresa con la telecamera" (`filmed-screen`), transizioni, grafici, oggetti 3D e sfondi animati. Un pezzo del catalogo si installa con `npx hyperframes add <nome>` e poi si veste con colori e font di `brand.md`.
 
 **GSAP e i suoi plugin sono in `assets/lib/gsap/`** (versione 3.15.1, gratuiti, vedi il `LEGGIMI.md` lì dentro): carica sempre `assets/lib/gsap/gsap.min.js`, mai GSAP da internet. Prima di ripiegare su un fade, chiediti se un plugin fa meglio: **SplitText** per il testo lettera per lettera o parola per parola, **DrawSVG** per connettori e sottolineature che si disegnano, **MorphSVG** per un'icona che diventa un'altra forma, **MotionPath** per oggetti che viaggiano su una curva, **CustomEase** per le curve della casa.
@@ -91,7 +93,7 @@ Regole imparate sui primi spot:
 - **Un elemento con id per ogni pezzo** (testo, tessera, logo, pannello) e **un tween letterale per riga** (`tl.fromTo("#id", {...}, {...}, tempo)`): così lo Studio li vede e si possono modificare a mano.
 - **Le molle diventano easing registrate** con `gsap.registerEase` (forma chiusa, normalizzata a 1). Le catene di molle sovrapposte diventano una sola tween con una easing "catena". Le somme di movimenti (es. comparsa + carica + lancio) vanno su **wrapper annidati**, mai due tween sovrapposti sulla stessa proprietà.
 - **Seconda tween sulla stessa proprietà:** `immediateRender: false`. Nessun avviso `overlapping_gsap_tweens` deve restare.
-- **Scie, motion blur e copie fantasma** stanno in una funzione `effects(t)` chiamata dall'`onUpdate` di una tween lunga quanto il film. Leggono le posizioni dalle tween stesse (`tl.getChildren`), così seguono le modifiche fatte nello Studio.
+- **Scie, motion blur e copie fantasma** (solo se richiesti: lo stile calmo non li usa) stanno in una funzione `effects(t)` chiamata dall'`onUpdate` di una tween lunga quanto il film. Leggono le posizioni dalle tween stesse (`tl.getChildren`), così seguono le modifiche fatte nello Studio.
 - **Sfondi alternativi** come clip con `data-hidden="true"`: si accendono con l'occhio sulla timeline.
 - **Musica:** un `<audio id="music">` portato a −14 LUFS con `npx hyperframes normalize-audio . --target music --lufs -14 --write` (scrive il volume giusto in `index.html`). Con una voce sopra: `--target music --reference voce`, poi abbassa la musica a circa 0,14.
 - **Convertire un film di Claude Design:** riprendi formule e tempi dal suo codice (film.jsx o simili). Scrivi un piccolo generatore (`progetto/tools/generate.mjs`) che produce 16:9 e 9:16 dallo stesso oggetto di layout. Un generatore sovrascrive le modifiche fatte nello Studio, quindi avvisa prima di rigenerare.

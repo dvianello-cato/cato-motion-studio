@@ -29,13 +29,19 @@ Il navy è l'inchiostro e non conta come accento: l'accento è uno solo, l'oro-a
 ## Sfondo tipico del sito
 Chiaro (`#FDFDFA`) con una griglia sottile di linee chiare. Nei video si può riprendere come sfondo calmo.
 
-## Movimento (stile di casa, nato con lo spot Cato Connectors)
-Quattro molle: snappy (k 520, c 34), default (k 260, c 28), heavy (k 140, c 26, m 1.2) e playful (definita, non usata).
-- snappy: comparse, impatti
-- default: voli, camera, uscite del testo
-- heavy: logo, entrate del testo
+## Movimento: lo stile standard è "calmo"
+Deciso il 2026-11-19 con un provino a confronto (piatto / molto mosso / calmo): i video Cato sono **un po' statici ma interessanti**. Si muove poco, ma succede sempre qualcosa.
 
-Il testo entra da una maschera, salendo con 4° di inclinazione. Non si usa mai l'opacità da sola. Gli elementi veloci hanno motion blur e una scia sottile del colore d'accento.
+**Sì, sempre:**
+- **Camera quasi ferma:** al massimo **una** spinta lenta per scena (zoom fino a ~1.4 in 3–4 s, `power1.inOut`), solo quando serve a leggere una schermata. Niente panoramiche ripetute.
+- **Testo parola per parola** che sale da una maschera (`SplitText`, `yPercent: 100`, 0,6–0,7 s, `power3.out`, uno sfasamento di ~0,12 s o una parola per battito). Niente rimbalzi.
+- **Entrate che si posano:** schermate, schede e pannelli salgono di poco (40–80 px) o arrivano appena inclinati (≤ 8°) e si fermano, 0,6–0,9 s, `power3.out`.
+- **Uscite morbide:** l'elemento scivola di 30–60 px e sparisce in ~0,35 s, al massimo con una sfocatura leggerissima.
+- **I dettagli fanno l'interesse:** linee e sottolineature arancio che si disegnano (`DrawSVG`), spunte e piccoli cambi a tempo con la musica, un pannello navy che sale come stacco, una luce che passa sul logo in chiusura, la griglia di puntini dello sfondo quasi ferma (pochi px in tutto il film).
+
+**No, salvo richiesta esplicita:** whip pan con scie, zoom o spostamenti di camera ripetuti, 3D di taglio o profondità marcata, lettere che rimbalzano o esplodono, motion blur e scie usati come effetto.
+
+Molle di casa (in `modelli/video-parlato/assets/molle.js`), da usare con misura: snappy (k 520, c 34) per piccole comparse, default (k 260, c 28), heavy (k 140, c 26, m 1.2) per il logo. Non si usa mai l'opacità da sola: un fade va sempre insieme a un piccolo spostamento o a una maschera.
 
 ## Tono
 Professionale, chiaro, italiano. Frasi brevi con il punto finale.
