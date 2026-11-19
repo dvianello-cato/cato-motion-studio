@@ -79,11 +79,13 @@ Le regole di HyperFrames sullo storyboard sono in `hyperframes/references/storyb
 **Non costruire senza un ok esplicito sullo storyboard.** Se chiedono "dammi direttamente il risultato", salta l'attesa, ma apri comunque lo storyboard e dichiara le scelte che hai fatto tu. Nella costruzione la disposizione approvata non si ridisegna: si veste (design completo, asset veri, movimento).
 
 ## 5. Costruzione in HyperFrames (formato modificabile nello Studio)
-Progetto in `films/<nome-video>/progetto/`, con `hyperframes.json`, una copia di `assets/brand` dentro `assets/`, `index.html` (16:9) e `compositions/<nome>-9x16.html`.
+Progetto in `films/<nome-video>/progetto/`, con `hyperframes.json`, una copia di `assets/brand` e di `assets/lib` dentro `assets/` (`cp -R assets/brand assets/lib films/<nome-video>/progetto/assets/`), `index.html` (16:9) e `compositions/<nome>-9x16.html`.
 
 Prima di scrivere composizioni leggi la skill `/hyperframes` del plugin e i suoi riferimenti che servono: `references/format.md` (struttura, attributi), `references/motion.md` (movimento), `references/sound.md` (suono), più il file del tipo di video in `references/types/` (per uno spot: `launch.md`). Se non sono caricate, le trovi in `~/.claude/plugins/cache/hyperframes/hyperframes/<versione>/skills/hyperframes/`.
 
 **Prima di disegnare a mano un effetto, cercalo nel catalogo** con `/hyperframes-registry` (`npx hyperframes catalog --json`): ci sono già scie di movimento (`echo-smear`), cursori grandi per i tutorial, una schermata "ripresa con la telecamera" (`filmed-screen`), transizioni, grafici, oggetti 3D e sfondi animati. Un pezzo del catalogo si installa con `npx hyperframes add <nome>` e poi si veste con colori e font di `brand.md`.
+
+**GSAP e i suoi plugin sono in `assets/lib/gsap/`** (versione 3.15.1, gratuiti, vedi il `LEGGIMI.md` lì dentro): carica sempre `assets/lib/gsap/gsap.min.js`, mai GSAP da internet. Prima di ripiegare su un fade, chiediti se un plugin fa meglio: **SplitText** per il testo lettera per lettera o parola per parola, **DrawSVG** per connettori e sottolineature che si disegnano, **MorphSVG** per un'icona che diventa un'altra forma, **MotionPath** per oggetti che viaggiano su una curva, **CustomEase** per le curve della casa.
 
 Regole imparate sui primi spot:
 - **Un elemento con id per ogni pezzo** (testo, tessera, logo, pannello) e **un tween letterale per riga** (`tl.fromTo("#id", {...}, {...}, tempo)`): così lo Studio li vede e si possono modificare a mano.

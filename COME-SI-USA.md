@@ -60,6 +60,7 @@ Per aprire lì un film fatto qui, chiedi a Claude "aprilo nell'app": lancia `npx
 |---|---|
 | `assets/brand/` | loghi, font, musica. Si usano solo questi. |
 | `assets/screenshots/` | schermate vere di Cato |
+| `assets/lib/gsap/` | GSAP e i suoi plugin (testo lettera per lettera, linee che si disegnano, forme che si trasformano) |
 | `films/<nome-video>/` | **tutto di un film, in una cartella sola** (vedi sotto) |
 | `modelli/` | i punti di partenza riutilizzabili, per esempio `video-parlato/` |
 | `tests/` | le prove tecniche del setup, da non toccare |

@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=1080, height=1920">
     <title>Prova HyperFrames 9:16</title>
     <!-- Solo per il test di /setup-studio: la stessa prova in verticale. Non è un film. -->
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script src="assets/lib/gsap/gsap.min.js"></script>
+    <script src="assets/lib/gsap/SplitText.min.js"></script>
+    <script src="assets/lib/gsap/DrawSVGPlugin.min.js"></script>
     <style>
       @font-face { font-family: "Manrope"; src: url("assets/brand/fonts/Manrope-VariableFont_wght.ttf") format("truetype"); font-weight: 200 800; font-display: block; }
       html, body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #FDFDFA; }
@@ -15,7 +17,8 @@
       #simbolo { position: absolute; left: 290px; top: 560px; width: 500px; height: 500px; }
       #riga { position: absolute; left: 0; width: 1080px; top: 1140px; height: 220px; overflow: hidden; text-align: center; }
       #testo { display: inline-block; font-family: "Manrope", sans-serif; font-weight: 800; font-size: 180px; line-height: 220px; letter-spacing: -0.02em; color: #0C213E; white-space: nowrap; }
-      #testo span { color: #0C213E; border-bottom: 18px solid #E8A33D; }
+      #testo span { color: #0C213E; }
+      #linea { position: absolute; left: 0; top: 0; width: 100%; height: 100%; overflow: visible; }
     </style>
   </head>
   <body>
@@ -23,15 +26,19 @@
       <div id="sfondo" class="clip" data-start="0" data-duration="4" data-track-index="0"></div>
       <div id="scena" class="clip" data-start="0" data-duration="4" data-track-index="1">
         <img id="simbolo" src="assets/brand/logo/cato-simbolo-navy.png" alt="">
+        <svg id="linea" viewBox="0 0 1080 1920"><path id="tratto" d="M 330 1400 C 480 1450, 620 1350, 750 1400" fill="none" stroke="#E8A33D" stroke-width="16" stroke-linecap="round"/></svg>
         <div id="riga"><div id="testo">Prova <span>ok</span></div></div>
       </div>
       <audio id="musica" src="assets/brand/audio/cato-music.wav" data-start="0" data-duration="4" data-track-index="2" data-volume="1"></audio>
     </div>
     <script>
       window.__timelines = window.__timelines || {};
+      gsap.registerPlugin(SplitText, DrawSVGPlugin);
+      const lettere = SplitText.create("#testo", { type: "chars" }).chars;
       const tl = gsap.timeline({ paused: true });
       tl.from("#simbolo", { scale: 0.6, rotation: -12, duration: 0.9, ease: "back.out(1.6)" }, 0.2)
-        .from("#testo", { yPercent: 110, rotation: 4, transformOrigin: "50% 100%", duration: 0.8, ease: "power3.out" }, 0.7)
+        .from(lettere, { yPercent: 120, rotation: 8, duration: 0.6, ease: "back.out(1.7)", stagger: 0.05 }, 0.7)
+        .from("#tratto", { drawSVG: "0%", duration: 0.7, ease: "power2.inOut" }, 1.4)
         .to("#simbolo", { rotation: 360, duration: 1.2, ease: "power2.inOut" }, 2.2);
       window.__timelines["main"] = tl;
     </script>

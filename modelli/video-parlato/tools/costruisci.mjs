@@ -303,7 +303,7 @@ fs.writeFileSync(path.join(root, "index.html"), `<!DOCTYPE html>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=${f.W}, height=${f.H}">
     <title>${esc(piano.titolo || "Video parlato Cato")}</title>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script src="assets/lib/gsap/gsap.min.js"></script>
     <script src="assets/molle.js"></script>
     <style>
       ${fontFace}

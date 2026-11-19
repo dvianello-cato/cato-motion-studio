@@ -38,7 +38,7 @@ Poi `bash tools/avvio.sh`: è lo stesso controllo che parte da solo a ogni apert
 
 ## 5. Test
 1. **Render da zero (strada A):** `npm test` deve creare `tests/output/test.mp4`. Con `ffprobe` verifica 1920×1080, 3 s, yuv420p.
-2. **HyperFrames:** in `tests/hyperframes-prova/` (un progetto di prova di 4 s, non un film) prima copia gli asset del brand con `rm -rf assets && mkdir assets && cp -R ../../assets/brand assets/brand`, poi lancia `npx hyperframes check --json` (0 errori) e `npx hyperframes render --fps 30 -q draft -o ../output/test-hyperframes.mp4`. Con `ffprobe` verifica 1920×1080, 4 s, traccia audio presente.
+2. **HyperFrames:** in `tests/hyperframes-prova/` (un progetto di prova di 4 s, non un film) prima copia gli asset del brand con `rm -rf assets && mkdir assets && cp -R ../../assets/brand ../../assets/lib assets/`, poi lancia `npx hyperframes check --json` (0 errori) e `npx hyperframes render --fps 30 -q draft -o ../output/test-hyperframes.mp4`. Con `ffprobe` verifica 1920×1080, 4 s, traccia audio presente.
 3. **Verticale:** come sopra con `-c compositions/prova-9x16.html -o ../output/test-hyperframes-9x16.mp4` → 1080×1920.
 4. **Trascrizione in italiano (per `/video-parlato`):** `say -v Alice -o tests/output/frase.aiff "Ciao, sono Cato. Trovo le gare giuste per te."`, poi `npx hyperframes transcribe tests/output/frase.aiff --model small --language it --json`. La prima volta scarica Whisper da solo (qualche minuto). Deve restituire la frase in italiano, non tradotta.
 5. **Voce** (solo se Fish Audio è collegato): genera "Benvenuti in Cato, i connettori lavorano per te." in italiano e salvala in `tests/output/test-voce.mp3`.

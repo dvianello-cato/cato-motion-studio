@@ -26,7 +26,7 @@ In silenzio: `node -v` (≥ 22), `ffmpeg -version`, `npx hyperframes --version` 
 
 ## 2. Il materiale
 Nome del film: breve, minuscolo, con trattini. Cartella `films/<nome>/`, come ogni film (vedi `CLAUDE.md`).
-1. Copia il modello: `cp -R modelli/video-parlato films/<nome>/progetto`, poi `cp -R assets/brand films/<nome>/progetto/assets/` e le schermate che servono in `films/<nome>/progetto/assets/screenshots/` (nomi semplici, senza spazi).
+1. Copia il modello: `cp -R modelli/video-parlato films/<nome>/progetto`, poi `cp -R assets/brand assets/lib films/<nome>/progetto/assets/` e le schermate che servono in `films/<nome>/progetto/assets/screenshots/` (nomi semplici, senza spazi).
 2. **Prepara il video** in `films/<nome>/progetto/assets/parlato.mp4`, con un fotogramma chiave al secondo (altrimenti lo Studio si blocca quando scorri):
    `ffmpeg -i <sorgente> -c:v libx264 -crf 16 -g <fps> -pix_fmt yuv420p -c:a aac -b:a 192k assets/parlato.mp4`
    - Se il formato richiesto è diverso da quello del video, ritaglia al centro della persona: per un 9:16 da un 16:9 `-vf "crop=ih*9/16:ih:<x>:0,scale=1080:1920"`, con `<x>` scelto guardando il provino. Dillo: si perde parte dell'inquadratura.
